@@ -1,0 +1,29 @@
+# Configuración de la base de datos PostgreSQL
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/rs_security
+        username: 
+        password: 
+        driver-class-name: org.postgresql.Driver
+
+# Configuración de Hibernate (opcional)
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            ddl-auto: update
+
+# Configuración de sobreescritura de beans (contexto de seguridad)
+    main:
+        allow-bean-definition-overriding: true
+
+# Configuración de sobreescritura de puerto
+server:
+  port: 8090
+
+rs_security:
+    validation:
+        notBlank:
+            message:
+                email-mandatory: correo obligatorio
+                username-mandatory: nombre de usuario obligatorio
+                password-mandatory: contraseña obligatoria
