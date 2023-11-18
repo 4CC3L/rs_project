@@ -1,10 +1,12 @@
 package com.social.security.service.impl;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.stereotype.Service;
 
+import com.social.security.config.RsSecurityProperties;
 import com.social.security.model.dto.UserDTO;
 import com.social.security.model.dto.UserInfoDTO;
 import com.social.security.model.entities.CredentialEntity;
@@ -22,8 +24,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    private final RsSecurityProperties properties;
+
+    public UserServiceImpl(UserRepository userRepository, RsSecurityProperties properties) {
         this.userRepository = userRepository;
+        this.properties = properties;
     }
 
     @Override
@@ -63,7 +68,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Mono<UserInfoDTO> getUserById(Long userId) {
-        return this.getUserByIdR(userId).map(foundUser -> {
+        return this.getUserByIdR(userId)
+        .switchIfEmpty(Mono.error(new RuntimeException(MessageFormat.format(properties.getUserNotFoundMessage(), userId))))
+        .map(foundUser -> {
             UserInfoDTO userInfoDTO = new UserInfoDTO();
             userInfoDTO.setFullName(foundUser.getFullName());
             userInfoDTO.setEmail(foundUser.getEmail());
@@ -76,7 +83,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Mono<UserInfoDTO> getUserByUsername(String username) {
-        return this.getUserByUsernameR(username).map(foundUser -> {
+        return this.getUserByUsernameR(username)
+        .switchIfEmpty(Mono.error(new RuntimeException(MessageFormat.format(properties.getUsernameNotFoundMessage(), username))))
+        .map(foundUser -> {
             UserInfoDTO userInfoDTO = new UserInfoDTO();
             userInfoDTO.setFullName(foundUser.getFullName());
             userInfoDTO.setEmail(foundUser.getEmail());

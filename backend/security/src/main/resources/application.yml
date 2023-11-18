@@ -18,8 +18,9 @@ spring:
 
 # Configuración de sobreescritura de puerto
 server:
-  port: 8090
+    port: 8090
 
+# Configuración propia del microservicio (mensajes, seguridad, etc.)
 rs_security:
     validation:
         notBlank:
@@ -27,3 +28,6 @@ rs_security:
                 email-mandatory: correo obligatorio
                 username-mandatory: nombre de usuario obligatorio
                 password-mandatory: contraseña obligatoria
+    messages:
+        user-not-found: El usuario con id {0} no fue encontrado
+        username-not-found: El usuario con nombre {0} no fue encontrado

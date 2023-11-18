@@ -3,6 +3,7 @@ package com.social.security.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.security.model.dto.UserInfoDTO;
@@ -29,6 +30,11 @@ public class UserController {
     @GetMapping("/{userId}")
     public Mono<UserInfoDTO> findUserById(@PathVariable("userId") Long userId) {
         return userService.getUserById(userId);
+    }
+
+    @GetMapping("/search")
+    public Mono<UserInfoDTO> findUserUsername(@RequestParam("username") String username) {
+        return userService.getUserByUsername(username);
     }
 
     
