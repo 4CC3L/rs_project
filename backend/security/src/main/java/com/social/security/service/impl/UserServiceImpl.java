@@ -6,7 +6,7 @@ import java.util.concurrent.CompletableFuture;
 
 import org.springframework.stereotype.Service;
 
-import com.social.security.config.RsSecurityProperties;
+import com.social.security.common.RsSecurityProperties;
 import com.social.security.model.dto.UserDTO;
 import com.social.security.model.dto.UserInfoDTO;
 import com.social.security.model.entities.CredentialEntity;

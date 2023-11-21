@@ -1,6 +1,8 @@
 package com.social.security.model.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.social.security.model.dto.UserDTO;
 import com.social.security.utility.DateUtils;
@@ -12,6 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -52,6 +56,14 @@ public class UserEntity extends MainEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "credential_id")
     private CredentialEntity credentials;
+
+    @ManyToMany
+    @JoinTable(
+        name = "USERS_PROFILES",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "profile_id")
+    )
+    private Set<ProfileEntity> profiles = new HashSet<>();
 
     /* domain methods */
 

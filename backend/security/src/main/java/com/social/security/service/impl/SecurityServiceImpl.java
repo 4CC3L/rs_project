@@ -2,6 +2,8 @@ package com.social.security.service.impl;
 
 import java.util.Map;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.social.security.model.dto.CredentialsDTO;
@@ -28,6 +30,8 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     public Mono<Map<String, Object>> signIn(CredentialsDTO credentials) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        
         return null;
     } 
     

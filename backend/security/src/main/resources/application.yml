@@ -2,8 +2,8 @@
 spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/rs_security
-        username: 
-        password: 
+        username: postgres
+        password: root
         driver-class-name: org.postgresql.Driver
 
 # Configuración de Hibernate (opcional)
@@ -31,3 +31,5 @@ rs_security:
     messages:
         user-not-found: El usuario con id {0} no fue encontrado
         username-not-found: El usuario con nombre {0} no fue encontrado
+    jwt:
+        secret: abcdefghijklmnOPQRSTUVWXYZ

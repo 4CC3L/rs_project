@@ -1,4 +1,4 @@
-package com.social.security.config;
+package com.social.security.common;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

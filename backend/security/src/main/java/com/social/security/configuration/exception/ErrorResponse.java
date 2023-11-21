@@ -1,4 +1,4 @@
-package com.social.security.config.exception;
+package com.social.security.configuration.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
